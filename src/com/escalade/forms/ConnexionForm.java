@@ -26,8 +26,8 @@ public class ConnexionForm {
 		String valid = null;
 		String identifiantTry = utilisateur.getIdentifiant();
 		String passwordTry = utilisateur.getPassword();
-		String identifiant = null;
 		String password = null;
+		String identifiant = null;
 		PreparedStatement statement = null;
 		ResultSet result = null;
 		
@@ -35,26 +35,28 @@ public class ConnexionForm {
 			String sqlRequest = "SELECT identifiant, password FROM Utilisateur WHERE identifiant = ?;";
 			statement = connexion.prepareStatement(sqlRequest);
 			statement.setString(1, identifiantTry);
-			result = statement.executeQuery();
-			while (result.next()) {
-				identifiant = result.getString("identifiant");
+			result = statement.executeQuery();	
+			if (result.first()) {				
 				password = result.getString("password");
+				identifiant = result.getString("identifiant");	
+				if (identifiant.equals(identifiantTry)) {
+					validId = "ok";
 				
-			}
-			if (identifiant.equals(identifiantTry)) {
-				validId = "ok";
-				if (password.equals(passwordTry)) {
-					valid = "ok";
+					if (password.equals(passwordTry)) {
+						valid = "ok";
+					}
+					else {
+						valid = "notok";
+					}
 				}
-				else {
-					valid = "notok";
-				}
+				else validId = "notok";
 			}
 			else {
-				validId = "notok";
+				validId = "notok";			
 			}
 			validation.setIdent(validId);
 			validation.setPass(valid);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

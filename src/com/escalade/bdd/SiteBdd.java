@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.escalade.beans.Recherche;
 import com.escalade.beans.Secteur;
 import com.escalade.beans.Site;
 
@@ -19,8 +20,10 @@ public class SiteBdd {
 	private String result;
 	private String critere;
 	private String comSQL;
-	public List<Site> rechercheSite(HttpServletRequest request) {
+	
+	public Recherche rechercheSite(HttpServletRequest request) {
 		
+		Recherche recherche = new Recherche();
 		List<Site> sites = new ArrayList<Site>();
 		
 		PreparedStatement statement = null;
@@ -57,13 +60,35 @@ public class SiteBdd {
 				sites.add(site);
 			}
 				
-				
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		String page = request.getParameter("page");		
+		int j = 1;
+		if ( page != null) {
+			int y = Integer.parseInt(page);
+			j = y;}
+		int i = 5 * (j - 1);
+		int h = sites.size();
+		int k = (int)((h/5)+1);
+		int a = 1;
+		List<Site> sitesPage = new ArrayList<Site>();
+		List<Integer> nbrPages = new ArrayList<Integer>();
 		
-		return sites;
+		while ( a < (k + 1)) {
+			nbrPages.add(a);
+			a++;
+		}
+		
+		while ( i < (5 * j) && i < h) {
+			sitesPage.add(sites.get(i));
+			
+			i++;
+		}
+		recherche.setNbrPages(nbrPages);
+		recherche.setSites(sitesPage);
+		return recherche;
 	}
 	
  	public Site afficherSite(int id) {

@@ -28,10 +28,11 @@
 <p>Resultat de la recherche</p>
 <p>Recherche : <c:out value = "${mot}"/></p>
 <p>Critere : <c:out value = "${mot2}"/></p>
+<p>Page de résultat n° : <c:out value = "${page}"/></p>
 <p>Sites trouvés :</p>
 <p>
 <ul>
-        <c:forEach var="site" items="${ sites }">
+        <c:forEach var="site" items="${ recherche.sites }">
             <li><c:out value="${ site.nom }" />  qui se trouve dans les <c:out value="${ site.lieu }" />
             </br>
             
@@ -40,6 +41,13 @@
             </li>
         </c:forEach>
     </ul>
+</p>
+<p>
+		<c:forEach var="a" items="${ recherche.nbrPages }">
+                       
+            <a href = "EscaladeBdd?page=<c:out value = "${a}"/>&recherche=<c:out value = "${mot}"/>&critere1=<c:out value = "${mot2}"/>">Page <c:out value="${ a }"/></a>      
+            
+        </c:forEach>
 </p>
 <p>Secteurs correspondants :</p>
 <p>

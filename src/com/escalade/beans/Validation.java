@@ -4,6 +4,14 @@ public class Validation {
 	
  private String ident;
  private String pass;
+ private int ide;
+ 
+public int getIde() {
+	return ide;
+}
+public void setIde(int ide) {
+	this.ide = ide;
+}
 public String getIdent() {
 	return ident;
 }

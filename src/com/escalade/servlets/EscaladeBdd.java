@@ -18,7 +18,7 @@ import java.util.List;
 
 import com.escalade.bdd.SecteurBdd;
 import com.escalade.bdd.SiteBdd;
-import com.escalade.forms.Form;
+
 
 @WebServlet("/EscaladeBdd")
 public class EscaladeBdd extends HttpServlet {
@@ -31,7 +31,15 @@ public class EscaladeBdd extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		SiteBdd siteBdd = new SiteBdd();
+		SecteurBdd secteurBdd = new SecteurBdd();
+		String search = request.getParameter("recherche");
+		String page = request.getParameter("page");
+		request.setAttribute("mot", search);
+		request.setAttribute("page", page);
+		request.setAttribute("secteurs",secteurBdd.rechercheSecteur(request));
+		request.setAttribute("recherche",siteBdd.rechercheSite(request));		
+		this.getServletContext().getRequestDispatcher("/WEB-INF/affichagebdd.jsp").forward(request, response);
 	}
 
 
@@ -41,7 +49,7 @@ public class EscaladeBdd extends HttpServlet {
 		SiteBdd siteBdd = new SiteBdd();
 		SecteurBdd secteurBdd = new SecteurBdd();
 		request.setAttribute("secteurs",secteurBdd.rechercheSecteur(request));
-		request.setAttribute("sites",siteBdd.rechercheSite(request));
+		request.setAttribute("recherche",siteBdd.rechercheSite(request));
 		request.setAttribute("mot", search);
 		request.setAttribute("mot2", critere1);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/affichagebdd.jsp").forward(request, response);
