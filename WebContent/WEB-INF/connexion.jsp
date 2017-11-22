@@ -6,7 +6,7 @@
 </head>
 <body>
 <p>
-<a href ="EscaladeAccueil?utilisateur=<c:out value ="${utilisateur.identifiant }"/>">Accueil</a>
+<a href ="EscaladeAccueil">Accueil</a>
 </p>
 <p>
 <strong>Se Connecter</strong>
@@ -30,9 +30,13 @@
 </p>
 <p>
 <c:if test ="${validation.pass == 'ok'}">Vous vous êtes bien connecté</br>
-Bienvenue sur le site, <strong><c:out value = "${utilisateur.identifiant }"/></strong>
+Bienvenue sur le site, <strong><c:out value = "${sessionScope.utilisateur.identifiant }"/></strong>
 </c:if>
 <c:if test ="${validation.pass == 'notok' }">Mot de passe incorrect</c:if>
+</p>
+
+<p>
+<c:if test ="${sessionScope.utilisateur.identifiant != null }"><a href = "Deconnexion">Deconnexion</a></c:if>
 </p>
 
 </body>

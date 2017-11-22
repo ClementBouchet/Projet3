@@ -7,9 +7,11 @@
 <body>
 
 <p>
-<c:if test ="${utilisateur != null }">Bienvienue, <c:out value = "${utilisateur }"/></c:if>
+<c:if test ="${sessionScope.utilisateur.identifiant != null }">Bienvienue, <strong><c:out value = "${sessionScope.utilisateur.identifiant }"/></strong></c:if>
 </p>
-
+<p>
+<c:if test ="${sessionScope.utilisateur.identifiant == null }"><a href = "Connexion">Connexion</a></c:if>
+</p>
 <p>
 Bonjour et bienvenue sur le site communautaire des grimpeurs!</br>
 
@@ -44,6 +46,9 @@ Consultez et partagez(bientôt) toutes les infos sur les meilleurs spots!
 <a href = "AddVoie">Ajouter une voie</a>
 </p>
 
+<p>
+<c:if test ="${sessionScope.utilisateur.identifiant != null }"><a href = "Deconnexion">Deconnexion</a></c:if>
+</p>
 
 </body>
 </html>

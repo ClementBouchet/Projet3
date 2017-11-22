@@ -70,7 +70,7 @@ Veuillez compléter les champs pour ajouter une nouvelle voie.
        	</select>
        	</p>
 			
-		<input type="submit"/>
+		<input type="submit" value = "Ajouter"/>
 	</form>
 </p>
 
@@ -78,6 +78,8 @@ Veuillez compléter les champs pour ajouter une nouvelle voie.
 	<ul>
         <c:forEach var="voie" items="${ voies }">
             <li><c:out value="${ voie.nom }" />  qui se trouve dans le secteur :  <c:out value="${ voie.secteur }" />
+                 </br>
+                 <c:out value = "${voie.num}"/>
                  </br>            
             <a href = "SeVoie?voie=<c:out value = "${voie.num}"/>">Check </a>
 			<p>

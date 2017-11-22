@@ -7,34 +7,33 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.escalade.bdd.SiteBdd;
-import com.escalade.beans.Site;
+import com.escalade.bdd.VoieBdd;
+import com.escalade.beans.Voie;
 
 
 
 
-@WebServlet("/ModifSite")
-public class ModifSite extends HttpServlet {
+@WebServlet("/SeVoie")
+public class SeVoie extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 
-    public ModifSite() {
+    public SeVoie() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String ide = request.getParameter("site");
+		String ide = request.getParameter("voie");
 		int iden = Integer.parseInt(ide);
-		SiteBdd siteBdd = new SiteBdd();
-		Site site = new Site();
-		site = siteBdd.afficherSite(iden);
-		//request.setAttribute("secteurs",siteBdd.recupererSecteur(iden));
-		//pour l'instant on n'ajoute pas les secteurs à partir de cette page, il faut en créer un nouveau
+		VoieBdd voieBdd = new VoieBdd();
+		Voie voie = new Voie();
+		voie = voieBdd.afficherVoie(iden);
 		request.setAttribute("iden",iden);
-		request.setAttribute("site",site);
-		this.getServletContext().getRequestDispatcher("/WEB-INF/modif_site.jsp").forward(request, response);
+		request.setAttribute("voie",voie);
+		request.setAttribute("nom", voie.getNom());
+		this.getServletContext().getRequestDispatcher("/WEB-INF/voie.jsp").forward(request, response);
 	}
 
 

@@ -64,6 +64,22 @@
     <servlet-name>Connexion</servlet-name>
     <servlet-class>com.escalade.servlets.Connexion</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>Deconnexion</servlet-name>
+    <servlet-class>com.escalade.servlets.Deconnexion</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>SeVoie</servlet-name>
+    <servlet-class>com.escalade.servlets.SeVoie</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ModifVoie</servlet-name>
+    <servlet-class>com.escalade.servlets.ModifVoie</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AccesPublic</servlet-name>
+    <servlet-class>com.escalade.servlets.AccesPublic</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>Escalade</servlet-name>
     <url-pattern>/page1</url-pattern>
@@ -128,6 +144,38 @@
     <servlet-name>Connexion</servlet-name>
     <url-pattern>/connexion</url-pattern>
   </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>Deconnexion</servlet-name>
+    <url-pattern>/deconnexion</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>SeVoie</servlet-name>
+    <url-pattern>/voie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ModifVoie</servlet-name>
+    <url-pattern>/modif_voie</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AccesPublic</servlet-name>
+    <url-pattern>/acces_public</url-pattern>
+  </servlet-mapping>
+  <filter>
+    <filter-name>Restriction</filter-name>
+    <filter-class>com.escalade.filters.Restriction</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>Restriction</filter-name>
+    <url-pattern>/AddSite</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>Restriction</filter-name>
+    <url-pattern>/AddSecteur</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>Restriction</filter-name>
+    <url-pattern>/AddVoie</url-pattern>
+  </filter-mapping>
   <jsp-config>
     <jsp-property-group>
       <url-pattern>*.jsp</url-pattern>

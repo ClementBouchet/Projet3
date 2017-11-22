@@ -8,7 +8,14 @@ public class Recherche {
 	
 	List<Integer> nbrPages;
 	List<Site> sites;
+	List<Secteur> secteurs;
 	
+	public List<Secteur> getSecteurs() {
+		return secteurs;
+	}
+	public void setSecteurs(List<Secteur> secteurs) {
+		this.secteurs = secteurs;
+	}
 	public List<Integer> getNbrPages() {
 		return nbrPages;
 	}

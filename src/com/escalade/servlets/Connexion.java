@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.escalade.beans.Utilisateur;
 import com.escalade.beans.Validation;
@@ -41,6 +42,16 @@ public class Connexion extends HttpServlet {
 		validation = form.verifyConnexion(utilisateur);
 		request.setAttribute("validation", validation);
 		request.setAttribute("utilisateur", utilisateur);
+		
+		HttpSession session = request.getSession();
+		
+		if (validation.getIdent() == "ok" && validation.getPass() == "ok") {
+			session.setAttribute("utilisateur", utilisateur);
+		}
+		else {
+			session.setAttribute("utilisateur", null);
+		}
+		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 	}
 

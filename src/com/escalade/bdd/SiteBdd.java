@@ -63,7 +63,18 @@ public class SiteBdd {
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (resultat != null)
+                    resultat.close();
+                if (statement != null)
+                    statement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 		String page = request.getParameter("page");		
 		int j = 1;
 		if ( page != null) {
@@ -71,7 +82,12 @@ public class SiteBdd {
 			j = y;}
 		int i = 5 * (j - 1);
 		int h = sites.size();
-		int k = (int)((h/5)+1);
+		int k = 0;
+		if (h%5 != 0) {
+			k = (int)((h/5)+1);}
+		else {
+			k = (int)(h/5);
+		}
 		int a = 1;
 		List<Site> sitesPage = new ArrayList<Site>();
 		List<Integer> nbrPages = new ArrayList<Integer>();
@@ -119,7 +135,18 @@ public class SiteBdd {
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (resultat != null)
+                    resultat.close();
+                if (statement != null)
+                    statement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 		
 		return site;
 	}
@@ -144,23 +171,42 @@ public class SiteBdd {
 			} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (statement != null)
+                    statement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 		
 	}	
 	
  	public void supprimerSite(int id) {
 	
-		loadDatabase();
+ 		PreparedStatement preparedStatement = null;
+ 		loadDatabase();
 		
 		try {
-			PreparedStatement preparedStatement = connexion.prepareStatement("DELETE FROM Site WHERE id=?;");
+			preparedStatement = connexion.prepareStatement("DELETE FROM Site WHERE id=?;");
 			preparedStatement.setInt(1, id);
 						
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 	}
 	
 	public List<Site> recupererSite(){
@@ -193,7 +239,18 @@ public class SiteBdd {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (resultat != null)
+                    resultat.close();
+                if (statement != null)
+                    statement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 		
 		return sites;
 		
@@ -202,10 +259,12 @@ public class SiteBdd {
 	public void ajouterSite(Site site) {
 		
 		loadDatabase();
+		PreparedStatement preparedStatement = null;
+				
 		String comSQL = "INSERT INTO Site(nom,lieu,description) VALUES(?,?,?);";
 		try {
 			
-			PreparedStatement preparedStatement = connexion.prepareStatement(comSQL);
+			preparedStatement = connexion.prepareStatement(comSQL);
 			preparedStatement.setString(1, site.getNom());
 			preparedStatement.setString(2, site.getLieu());
 			preparedStatement.setString(3, site.getDescription());
@@ -213,7 +272,16 @@ public class SiteBdd {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (preparedStatement != null)
+                    preparedStatement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 	}
 	
 	private void loadDatabase() {
@@ -263,7 +331,18 @@ public class SiteBdd {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}finally {
+            // Fermeture de la connexion
+            try {
+                if (resultat != null)
+                    resultat.close();
+                if (statement != null)
+                    statement.close();
+                if (connexion != null)
+                    connexion.close();
+            } catch (SQLException ignore) {
+            }
+        }
 		
 		return secteurs;
 		

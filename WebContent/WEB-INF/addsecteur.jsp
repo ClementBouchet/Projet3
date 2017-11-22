@@ -36,7 +36,7 @@ Veuillez compléter les champs pour ajouter un nouveau secteur.
 		<input type="text" id="rocher" name="rocher"/>
 		</p>
 			
-		<input type="submit"/>
+		<input type="submit" value ="Ajouter"/>
 	</form>
 </p>
 

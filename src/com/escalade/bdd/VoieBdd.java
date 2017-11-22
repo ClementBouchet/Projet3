@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.escalade.beans.Secteur;
 import com.escalade.beans.Voie;
 
 
@@ -80,7 +81,7 @@ public List<Voie> rechercheVoie(HttpServletRequest request) {
 		ResultSet resultat = null;
 		
 		loadDatabase();
-		String comSQL = "SELECT * FROM Voie WHERE id=?;";
+		String comSQL = "SELECT nom, cotation, secteur, longueur FROM Voie WHERE id=?;";
 		
 		try {
 			
@@ -91,14 +92,12 @@ public List<Voie> rechercheVoie(HttpServletRequest request) {
 				String nom = resultat.getString("nom");
 				String secteur = resultat.getString("secteur");
 				long longueur = resultat.getLong("longueur");
-				String site = resultat.getString("site");
 				String cotation = resultat.getString("cotation");
 				voie.setNom(nom);
 				voie.setSecteur(secteur);
 				voie.setLongueur(longueur);
 				voie.setNum(id);
 				voie.setCotation(cotation);
-				voie.setSite(site);
 			}
 				
 				
@@ -228,5 +227,40 @@ public List<Voie> rechercheVoie(HttpServletRequest request) {
 		
 	}
 
+	public List<Secteur> recupererSecteur(){
+		//Affiche tous les secteurs de la base de données dans la page pour ajouter des secteurs
+		List<Secteur> secteurs = new ArrayList<Secteur>();
+		
+		Statement statement = null;
+		ResultSet resultat = null;
+		
+		loadDatabase();
+		
+		
+		try {
+			statement = connexion.createStatement();
+			resultat = statement.executeQuery("SELECT id, nom, site FROM Secteur;");
+			
+			while(resultat.next()) {
+				String nom = resultat.getString("nom");
+				String site = resultat.getString("site");
+				int id = resultat.getInt("id");
+				
+				Secteur secteur = new Secteur();
+				secteur.setNom(nom);
+				secteur.setSite(site);
+				secteur.setNum(id);
+				
+				secteurs.add(secteur);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return secteurs;
+		
+	}
 
 }
