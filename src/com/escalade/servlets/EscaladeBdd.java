@@ -35,8 +35,10 @@ public class EscaladeBdd extends HttpServlet {
 		SecteurBdd secteurBdd = new SecteurBdd();
 		String search = request.getParameter("recherche");
 		String page = request.getParameter("page");
+		String critere1 = request.getParameter("critere1");
 		request.setAttribute("mot", search);
 		request.setAttribute("page", page);
+		request.setAttribute("mot2", critere1);
 		request.setAttribute("secteurs",secteurBdd.rechercheSecteur(request));
 		request.setAttribute("recherche",siteBdd.rechercheSite(request));		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/affichagebdd.jsp").forward(request, response);

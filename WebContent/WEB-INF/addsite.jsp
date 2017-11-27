@@ -31,7 +31,7 @@ Veuillez compléter les champs pour ajouter un nouveau site.
 		<textarea id="description" name="description" rows="10" cols="50"/></textarea>
 		</p>
 			
-		<input type="submit"/ value = "Ajouter le site">
+		<input type="submit" value = "Ajouter le site"/>
 	</form>
 </p>
 

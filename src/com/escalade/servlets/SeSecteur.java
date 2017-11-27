@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.escalade.bdd.ComBdd;
 import com.escalade.bdd.SecteurBdd;
 
 import com.escalade.beans.Secteur;
@@ -30,10 +31,12 @@ public class SeSecteur extends HttpServlet {
 		String ide = request.getParameter("secteur");
 		int iden = Integer.parseInt(ide);
 		SecteurBdd secteurBdd = new SecteurBdd();
+		ComBdd comBdd = new ComBdd();
 		Secteur secteur = new Secteur();
 		secteur = secteurBdd.afficherSecteur(iden);
 		request.setAttribute("iden",iden);
 		request.setAttribute("secteur",secteur);
+		request.setAttribute("coms", comBdd.afficherCom(secteur.getNom(), "secteur"));
 		this.getServletContext().getRequestDispatcher("/WEB-INF/secteur.jsp").forward(request, response);
 	}
 

@@ -21,7 +21,7 @@
            	<option value="alpes">Alpes</option>         	
        	</select>
 		</p>
-		<input type="submit"/>
+		<input type="submit" value = "Rechercher"/>
 	</form>
 </p>
 

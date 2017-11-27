@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.escalade.bdd.ComBdd;
 import com.escalade.bdd.VoieBdd;
 import com.escalade.beans.Voie;
 
@@ -28,11 +29,13 @@ public class SeVoie extends HttpServlet {
 		String ide = request.getParameter("voie");
 		int iden = Integer.parseInt(ide);
 		VoieBdd voieBdd = new VoieBdd();
+		ComBdd comBdd = new ComBdd();
 		Voie voie = new Voie();
 		voie = voieBdd.afficherVoie(iden);
 		request.setAttribute("iden",iden);
 		request.setAttribute("voie",voie);
 		request.setAttribute("nom", voie.getNom());
+		request.setAttribute("coms", comBdd.afficherCom(voie.getNom(), "voie"));
 		this.getServletContext().getRequestDispatcher("/WEB-INF/voie.jsp").forward(request, response);
 	}
 
